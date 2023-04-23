@@ -1,9 +1,9 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { 
+import {
   Button,
   HStack,
   Spacer,
-  Text,  
+  Text,
   VStack,
   useRadioGroup,
 } from "@chakra-ui/react";
@@ -21,27 +21,37 @@ function Options(props) {
   const group = getRootProps();
 
   return (
-    <VStack zIndex="modal" bgColor="#202123" w="16.5rem" p="0.7rem" h="100vh">
+    <VStack
+      zIndex="modal"
+      bgColor="#202123"
+      w="16.5rem"
+      p="0.7rem"
+      h="100vh"
+      as="nav"
+    >
       <Button
-        bgColor="#202123"
+        bgColor="transparent"
         w="100%"
         h="3rem"
         color="white"
         borderWidth="1px"
-        borderColor="gray.400"
-        _hover={{ bgColor: "gray.600" }}
+        borderColor="gray.500"
+        _hover={{ bgColor: "#3A3C40" }}
         leftIcon={<AddIcon boxSize="0.8rem" />}
       >
-        <Text fontSize='md' fontWeight="500">New Chat</Text>
+        <Text fontSize="md" fontWeight="500">
+          New Chat
+        </Text>
       </Button>
-      {/* <Spacer /> */}
       {props.children}
       <Spacer />
       {options.map((value) => {
         const radio = getRadioProps({ value });
         return (
           <RadioCard key={value} {...radio}>
-            <Text fontSize='md' fontWeight="500">{value}</Text>
+            <Text fontSize="md" fontWeight="500">
+              {value}
+            </Text>
           </RadioCard>
         );
       })}
