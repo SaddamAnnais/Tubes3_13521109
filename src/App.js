@@ -4,6 +4,7 @@ import Options from "./Sidebar/Options";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Chat from "./Chat/Chat";
+import SendMsgBox from "./Chat/SendMsgBox";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Flex direction="row">
+      <Flex direction="row" bgColor="#343541">
         <Sidebar historyData={history}/>
         <Chat />
       </Flex>

@@ -18,8 +18,6 @@ function Options(props) {
     onChange: console.log,
   });
 
-  const group = getRootProps();
-
   return (
     <VStack
       zIndex="modal"
