@@ -1,11 +1,10 @@
-import { Box, Button, Flex, Icon, Input, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Input, Spacer } from "@chakra-ui/react";
 import { MdComment, MdOutlineDelete } from "react-icons/md";
 import { ImPencil } from "react-icons/im";
 import { BsCheckLg } from "react-icons/bs";
 import { useRef, useState } from "react";
 
 function HistoryEntry(props) {
-  const [isClicked, setIsClicked] = useState(false);
   const [titleName, setTitleName] = useState(props.text);
   const changeTitleRef = useRef(null);
   const [deleted, setDeleted] = useState(false);
@@ -14,16 +13,23 @@ function HistoryEntry(props) {
   const HandleConfirmEdit = () => {
     setIsNotEditable(true);
     if (changeTitleRef.current.value !== titleName) {
-      console.log(props.id);
-      console.log(changeTitleRef.current.value);
+      const editTitlePayload = {id : props.id, newTitleName: changeTitleRef.current.value}
+      // Post request payload to server
+      
       setTitleName(changeTitleRef.current.value);
     }
   };
 
   const HandleTrashButton = () => {
+    const trashPayload = {id : props.id}
+    // Post request payload to server
+
     setDeleted(true);
-    console.log(props.id);
   };
+
+  const entryClickedHandler= () => {
+    props.clickedId(props.id)
+  }
 
   const checkButton = (
     <>
@@ -78,14 +84,14 @@ function HistoryEntry(props) {
       h="3rem"
       minH="3rem"
       w="100%"
-      bgColor={isClicked ? "#3A3C40" : "transparent"}
+      bgColor={props.chosen ? "#3A3C40" : "transparent"}
       color="white"
       px="0.4rem"
-      _hover={{ bgColor: isClicked ? "#3A3C40" : "#2b2c2e" }}
+      _hover={{ bgColor: props.chosen ? "#3A3C40" : "#2b2c2e" }}
       mt="0"
       mb="0.3rem"
       borderRadius="lg"
-      onClick={() => setIsClicked(true)}
+      onClick={entryClickedHandler}
     >
       <Box transform="scaleX(-1)" mt="0.4rem" ml="0.3rem">
         <Icon as={MdComment} boxSize="1.2rem" />
@@ -113,7 +119,7 @@ function HistoryEntry(props) {
       />
 
       <Spacer />
-      {isClicked && RightSideButton}
+      {props.chosen && RightSideButton}
     </Flex>
   );
 

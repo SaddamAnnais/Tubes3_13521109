@@ -20,9 +20,6 @@ function SendMsgBox(props) {
     const currentRows = Math.floor(
       event.target.scrollHeight / textareaLineHeight
     );
-
-    console.log("currentRows = " + currentRows);
-    console.log("rows = " + rows);
     if (currentRows !== previousRows && currentRows < 5) {
       setRows(currentRows);
     } else if (currentRows > 4) {

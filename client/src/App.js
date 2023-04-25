@@ -21,14 +21,14 @@ function App() {
 
         status.loading = false;
         setStatus(status);
-        console.log(status);
+        console.log("status: " + status);
       })
       .catch(error => {
         status.loading = false;
         status.error = true;
         status.msg = error;
         setStatus(status);        
-        console.log(status);
+        console.log("status: " + status);
       });
   }, []);
 
