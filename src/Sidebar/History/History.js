@@ -6,7 +6,7 @@ function History(props) {
   return (
     <Scrollbar>
       {props.historyData &&
-        props.historyData.map((value) => <HistoryEntry text={value.name} key={value.id} />)}
+        props.historyData.map((value) => <HistoryEntry text={value.name} key={value.id} id={value.id} />)}
     </Scrollbar>
   );
 }

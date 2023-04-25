@@ -22,7 +22,7 @@ function Options(props) {
     <VStack
       zIndex="modal"
       bgColor="#202123"
-      w="16.5rem"
+      w="21rem"
       p="0.7rem"
       h="100vh"
       as="nav"

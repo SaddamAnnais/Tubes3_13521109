@@ -1,38 +1,123 @@
-import { Box, Button, Icon, Text } from "@chakra-ui/react";
-import { MdComment } from "react-icons/md";
+import { Box, Button, Flex, Icon, Input, Spacer, Text } from "@chakra-ui/react";
+import { MdComment, MdOutlineDelete } from "react-icons/md";
+import { ImPencil } from "react-icons/im";
+import { BsCheckLg } from "react-icons/bs";
+import { useRef, useState } from "react";
 
 function HistoryEntry(props) {
-  return (
-    <Button
+  const [isClicked, setIsClicked] = useState(false);
+  const [titleName, setTitleName] = useState(props.text);
+  const changeTitleRef = useRef(null);
+  const [deleted, setDeleted] = useState(false);
+  const [isNotEditable, setIsNotEditable] = useState(true);
+
+  const HandleConfirmEdit = () => {
+    setIsNotEditable(true);
+    if (changeTitleRef.current.value !== titleName) {
+      console.log(props.id);
+      console.log(changeTitleRef.current.value);
+      setTitleName(changeTitleRef.current.value);
+    }
+  };
+
+  const HandleTrashButton = () => {
+    setDeleted(true);
+    console.log(props.id);
+  };
+
+  const checkButton = (
+    <>
+      <Box
+        as="button"
+        mt="0.4rem"
+        ml="0.4rem"
+        color="grey.400"
+        onClick={HandleConfirmEdit}
+      >
+        <Icon as={BsCheckLg} boxSize="1.2rem" />
+      </Box>
+    </>
+  );
+
+  const editAndTrashButton = (
+    <>
+      <Box
+        as="button"
+        mt="0.4rem"
+        ml="0.4rem"
+        onClick={() => setIsNotEditable(false)}
+        color="gray.400"
+        _hover={{ color: "white" }}
+      >
+        <Icon as={ImPencil} boxSize="0.9rem" />
+      </Box>
+      <Box
+        as="button"
+        mt="0.4rem"
+        ml="0.4rem"
+        onClick={HandleTrashButton}
+        color="gray.400"
+        _hover={{ color: "white" }}
+      >
+        <Icon as={MdOutlineDelete} boxSize="1.2rem" />
+      </Box>
+    </>
+  );
+
+  const RightSideButton = (
+    <>
+      {isNotEditable && editAndTrashButton}
+      {!isNotEditable && checkButton}
+    </>
+  );
+
+  const entry = (
+    <Flex
+      dir="row"
+      alignItems="center"
       h="3rem"
       minH="3rem"
       w="100%"
-      my="0.5rem"
-      bgColor="transparent"
+      bgColor={isClicked ? "#3A3C40" : "transparent"}
       color="white"
-      pl="0.6rem"
-      _hover={{ bgColor: "#3A3C40" }}
+      px="0.4rem"
+      _hover={{ bgColor: isClicked ? "#3A3C40" : "#2b2c2e" }}
       mt="0"
       mb="0.3rem"
+      borderRadius="lg"
+      onClick={() => setIsClicked(true)}
     >
-      <Box transform="scaleX(-1)" mt="0.4rem" ml="0">
+      <Box transform="scaleX(-1)" mt="0.4rem" ml="0.3rem">
         <Icon as={MdComment} boxSize="1.2rem" />
       </Box>
-      <Text
+      <Input
         w="100%"
-        textAlign="left"
         ml="0.6rem"
+        pr="0.3rem"
+        pl="0.6rem"
         fontWeight="500"
         color="white"
-        overflow="hidden"
-        bgGradient="linear(to-r, white 80%, transparent 100%)"
-        bgClip="text"
         fontSize="sm"
-      >
-        {props.text}
-      </Text>
-    </Button>
+        defaultValue={titleName}
+        border="1px solid white"
+        isDisabled={isNotEditable}
+        _disabled={{
+          opacity: "1",
+          cursor: "default",
+          border: "None",
+          overflow: "hidden",
+          bgGradient: "linear(to-r, white 70%, transparent 95%)",
+          bgClip: "text",
+        }}
+        ref={changeTitleRef}
+      />
+
+      <Spacer />
+      {isClicked && RightSideButton}
+    </Flex>
   );
+
+  return <>{!deleted && entry}</>;
 }
 
 export default HistoryEntry;

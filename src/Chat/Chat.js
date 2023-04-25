@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import SendMsgBox from "./SendMsgBox";
 import ChatMessages from "./ChatMessages/ChatMessages";
+import EmptyMessages from "./ChatMessages/EmptyMessages";
 
 function Chat(props) {
   return (
@@ -24,8 +25,8 @@ function Chat(props) {
       spacing="0"
       position="relative"
     >
-      <ChatMessages />
-      {/* <Flex w="full" h="20rem" bgColor="transparent"/> */}
+      {/* <ChatMessages /> */}
+      <EmptyMessages />
       <SendMsgBox />
     </Flex>
   );
