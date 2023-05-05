@@ -1,10 +1,10 @@
-# BukanBjorka
+# ChatBjorka
 
 Implementasi algoritma KMP (Knuth–Morris–Pratt) dan BM (Boyer–Moore) untuk pencocokan string dalam program chat bot.
 
 ## Table of Contents
 
-- [BukanBjorka](#BukanBjorka)
+- [ChatBjorka](#ChatBjorka)
   - [Table of Contents](#table-of-contents)
   - [Aplikasi algoritma KMP dan BM dalam Chat Bot](#aplikasi-algoritma-bfs-dan-dfs-dalam-treasure-hunt-solver)
   - [Requirements](#requirements)
@@ -33,9 +33,9 @@ Karena program dideploy, program dapat langsung dibuka pada https://saddamannais
 
 ## Contoh Tampilan Program
 
-![firstImg](img/1.png)
-
 ![secondImg](img/2.png)
+
+![firstImg](img/1.png)
 
 ![thirdImg](img/3.png)
 
