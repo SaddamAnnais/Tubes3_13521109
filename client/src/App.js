@@ -129,6 +129,8 @@ function App() {
       setNewChat(false);
     }
 
+    console.log(payload);
+
     const doRequest = () => {
       axios
         .post(

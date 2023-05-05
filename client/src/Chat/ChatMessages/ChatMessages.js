@@ -13,7 +13,7 @@ function ChatMessages(props) {
   };
 
   useEffect(() => {
-    setTimeout(setToBottom, 0);
+    setTimeout(setToBottom, 80);
   }, [props.data]);
 
   return (
@@ -24,7 +24,7 @@ function ChatMessages(props) {
       spacing="0"
       bgColor="#343541"
       ref={containerRef}
-      style={{ scrollBehavior: props.chatEffect ? "smooth" : "auto"  }}
+      scrollBehavior="smooth"
     >
       {props.data.map((value, index) => {
         const key = `message-${index}`;

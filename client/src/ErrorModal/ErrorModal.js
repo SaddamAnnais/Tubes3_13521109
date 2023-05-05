@@ -16,7 +16,7 @@ function ErrorModal(props) {
             <Text >{props.msg}. Please reload the page</Text>
           </ModalBody>
           <ModalFooter>
-            <Button bgColor="teal.400" color="white" onClick={handleReload}>Reload</Button>
+            <Button bgColor="teal.400" color="white" onClick={handleReload} _hover={{bgColor: "teal.200"}}>Reload</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
