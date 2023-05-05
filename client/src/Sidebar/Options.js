@@ -15,7 +15,7 @@ function Options(props) {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "algorithm",
     defaultValue: "KMP",
-    onChange: console.log,
+    onChange: props.algo,
   });
 
   return (
@@ -26,6 +26,7 @@ function Options(props) {
       p="0.7rem"
       h="100vh"
       as="nav"
+      minW="16rem"
     >
       <Button
         bgColor="transparent"
@@ -36,6 +37,7 @@ function Options(props) {
         borderColor="gray.500"
         _hover={{ bgColor: "#3A3C40" }}
         leftIcon={<AddIcon boxSize="0.8rem" />}
+        onClick={() => props.newChatSignal()}
       >
         <Text fontSize="md" fontWeight="500">
           New Chat

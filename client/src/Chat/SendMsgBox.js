@@ -7,13 +7,15 @@ import {
   Spacer,
   Textarea,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
 
 function SendMsgBox(props) {
   const [rows, setRows] = useState(1);
+  const [userMsg, setUserMsg] = useState('');
+  const textareaRef = useRef(null);
 
-  function handleTextHeight(event) {
+  const handleTextHeight = (event) => {
     const textareaLineHeight = 25;
     const previousRows = event.target.rows;
     event.target.rows = 1;
@@ -26,6 +28,22 @@ function SendMsgBox(props) {
       event.target.rows = 4;
     } else {
       event.target.rows = previousRows;
+    }
+  }
+
+  const handleOnSend = () => {
+    if (userMsg.trim() !== "" && props.canSendMessage) {
+      textareaRef.current.focus();
+      setUserMsg("");
+      
+      props.newUsrMsg(userMsg.trim());
+    }
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey)  {
+      event.preventDefault();
+      handleOnSend();
     }
   }
 
@@ -53,12 +71,18 @@ function SendMsgBox(props) {
         rows={rows}
         resize="none"
         _hover={{ boderColor: "black" }}
+        onChange={e => setUserMsg(e.target.value)}
+        value={userMsg}
+        onKeyDown={handleKeyDown}
+        ref={textareaRef}
       />
       <IconButton
         h="3rem"
         w="3rem"
         colorScheme="teal"
         icon={<Icon as={RiSendPlaneFill} boxSize="1.4rem" />}
+        onClick={handleOnSend}
+        isLoading={!props.canSendMessage}
       />
       <Spacer />
     </HStack>

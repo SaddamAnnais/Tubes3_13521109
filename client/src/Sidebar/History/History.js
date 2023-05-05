@@ -1,38 +1,36 @@
 import HistoryEntry from "./HistoryEntry";
 import Scrollbar from "../../CustomComponents/Scrollbar";
-import { useState } from "react";
-import { Skeleton, Spinner, Text } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 
 function History(props) {
-  const [chosenId, setChosenId] = useState(-1);
 
   const entryClickedHandler = (e) => {
-    setChosenId(e);
     props.chatId(e)
+    
   }
 
   const HistoryContent = (status) => {
     if (status.loading) {
-      return <Spinner m="auto" color="white" />
-    } else if (status.error) {
-      return <Text color="red.500" m="auto">{status.msg}</Text>
+      return <Spinner m="auto" color="teal.200" />
     } else {
       return <>{props.historyData.map((value) => {
-        const shown = value.id === chosenId;
+        const shown = value.id_title === props.currId;
+        // console.log(value.id);
+        // console.log(props.currId);
         return (
           <HistoryEntry
-            text={value.name}
-            key={value.id}
-            id={value.id}
+            text={value.title}
+            key={value.id_title}
+            id={value.id_title}
             chosen={shown}
             clickedId={(e) => entryClickedHandler(e)}
+            editTitlePayload={(val) => props.editTitlePayload(val)}
+            trashPayload={(val) => props.trashPayload(val)}
           />
         );
       })}</>
     }
   } 
-
-  console.log(props.loading)
 
   return (
     <Scrollbar>

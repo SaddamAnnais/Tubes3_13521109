@@ -6,22 +6,15 @@ import EmptyMessages from "./ChatMessages/EmptyMessages";
 
 function Chat(props) {
   const chatContent = (status) => {
-    if (status.loading) {
-      return <Spinner m="auto" color="white" />;
-    } else if (status.error) {
-      return (
-        <Text color="red.500" m="auto">
-          {status.msg}
-        </Text>
-      );
-    } else {
-      return (
-        <>
-          <EmptyMessages />
-          {/* tambahin untuk bukan empty messages */}
-        </>
-      );
-    }
+    if (status.loading) return <Spinner m="auto" color="teal.200" />;
+    else if (props.newChat) return <EmptyMessages />;
+    return (
+      <ChatMessages
+        data={props.data}
+        key={props.id}
+        chatEffect={props.chatEffect}
+      />
+    );
   };
 
   return (
@@ -33,7 +26,10 @@ function Chat(props) {
       position="relative"
     >
       {chatContent(props.status)}
-      <SendMsgBox />
+      <SendMsgBox
+        newUsrMsg={(msg) => props.newUsrMsg(msg)}
+        canSendMessage={props.canSendMessage}
+      />
     </Flex>
   );
 }

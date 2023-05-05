@@ -2,7 +2,8 @@ import { Box, Flex, Icon, Input, Spacer } from "@chakra-ui/react";
 import { MdComment, MdOutlineDelete } from "react-icons/md";
 import { ImPencil } from "react-icons/im";
 import { BsCheckLg } from "react-icons/bs";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 function HistoryEntry(props) {
   const [titleName, setTitleName] = useState(props.text);
@@ -10,20 +11,24 @@ function HistoryEntry(props) {
   const [deleted, setDeleted] = useState(false);
   const [isNotEditable, setIsNotEditable] = useState(true);
 
+  useEffect(() => {
+    if (props.chosen) setIsNotEditable(props.chosen);
+    else setIsNotEditable(!props.chosen);
+    
+  }, [props.chosen])
+
   const HandleConfirmEdit = () => {
     setIsNotEditable(true);
     if (changeTitleRef.current.value !== titleName) {
-      const editTitlePayload = {id : props.id, newTitleName: changeTitleRef.current.value}
-      // Post request payload to server
-      
+      const editTitlePayload = {id : props.id, newTitleName: changeTitleRef.current.value.substring(0, 255)}            
       setTitleName(changeTitleRef.current.value);
+      props.editTitlePayload(editTitlePayload);
     }
   };
 
   const HandleTrashButton = () => {
     const trashPayload = {id : props.id}
-    // Post request payload to server
-
+    props.trashPayload(trashPayload);
     setDeleted(true);
   };
 
