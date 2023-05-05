@@ -3,7 +3,6 @@ import { MdComment, MdOutlineDelete } from "react-icons/md";
 import { ImPencil } from "react-icons/im";
 import { BsCheckLg } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
 
 function HistoryEntry(props) {
   const [titleName, setTitleName] = useState(props.text);

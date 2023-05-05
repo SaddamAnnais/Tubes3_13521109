@@ -1,6 +1,5 @@
-import { Flex, Spacer, VStack } from "@chakra-ui/react";
+import { Spacer, VStack } from "@chakra-ui/react";
 import MessageEntry from "./MessageEntry";
-import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useRef } from "react";
 
 function ChatMessages(props) {

@@ -1,10 +1,8 @@
 import { ChakraProvider, Flex } from "@chakra-ui/react";
 import Sidebar from "./Sidebar/Sidebar";
-import Options from "./Sidebar/Options";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Chat from "./Chat/Chat";
-import SendMsgBox from "./Chat/SendMsgBox";
 import ErrorModal from "./ErrorModal/ErrorModal";
 import { v4 as uuidv4 } from "uuid";
 
@@ -51,7 +49,7 @@ function App() {
       axios
         .get("https://stima3-api-golang.azurewebsites.net/history/" + userId)
         .then((response) => {
-          console.log(response.data.historyTitle);
+          // console.log(response.data.historyTitle);
           setHistory(response.data.historyTitle);
 
           const newStatus = { ...status };
@@ -82,7 +80,7 @@ function App() {
     setChatEffect(false);
     let retries = 0;
 
-    console.log(chatId);
+    // console.log(chatId);
 
     const doRequest = () => {
       axios
@@ -129,7 +127,7 @@ function App() {
       setNewChat(false);
     }
 
-    console.log(payload);
+    // console.log(payload);
 
     const doRequest = () => {
       axios
@@ -148,7 +146,7 @@ function App() {
           setChatData(newBotResponse);
           setCanSendMessage(true);
 
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           if (retries < maxRetries) {
@@ -172,7 +170,7 @@ function App() {
   const editTitlePayloadHandler = (newTitle, maxRetries, retryDelay) => {
     let retries = 0;
     const payload = { nama: newTitle.newTitleName };
-    console.log(payload);
+    // console.log(payload);
     const doRequest = () => {
       axios
         .post(
@@ -210,7 +208,7 @@ function App() {
             deleteId.id
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           const newChatId = uuidv4();
           setCurrentChatId(newChatId);
           setChatData([]);
@@ -238,7 +236,7 @@ function App() {
     setCurrentChatId(newId);
     setChatData([]);
     setNewChat(true);
-    console.log(newId);
+    // console.log(newId);
   };
 
   return (
